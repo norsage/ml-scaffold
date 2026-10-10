@@ -1,0 +1,35 @@
+# ml-scaffold values of this project. Committed: no secrets here.
+# scripts/render.py of the ml-scaffold skill reads it from the project root.
+
+[project]
+# Short name, lowercase, letters, digits and dashes: the MLflow experiment and
+# whatever the components name after the project (their adapters say what).
+name = "myproject"
+# Python package under src/ (lowercase, underscores).
+pkg = "myproject"
+# Human title for README and AGENTS.md, in the project's language (`lang`).
+title = "myproject"
+# One paragraph for README: what the project is for (from the brief).
+description = ""
+# Python minor version, from the brief or the developer; empty: the
+# skeleton's default. Goes to `scaffold.py --python`, which refuses a version
+# the skeleton does not run on and says why (framework.md, step 2.1).
+python = ""
+# Language of the project's documents: README, conventions-local, protocols.
+# A directory of templates/: "en" or "ru".
+lang = "en"
+# Connected components: files of components/ of the skill.
+components = [
+    "research-log",
+    "task-tracker",
+    "mlflow-tracking",
+    "lightning-hydra",
+]
+
+# Resources of the project made at the resources step (framework.md, step 4),
+# by the components that have one; their adapters name the keys. Empty until
+# then; render.py leaves them as placeholders.
+[resources]
+
+# Overrides of the skill's infra.toml, normally empty.
+[infra]

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow",
+      "*/.ssh/id_*": "deny",
+      "*/.aws/credentials": "deny",
+      "*/.mlflow/credentials": "deny",
+      "*/.netrc": "deny",
+      "*/.git-credentials": "deny",
+      "*/.config/ml-scaffold/deny-probe": "deny"
+    },
+    "edit": {
+      "*": "allow",
+      "*/.ssh/*": "deny",
+      "*/.aws/*": "deny",
+      "*/.mlflow/*": "deny"
+    },
+    "bash": {
+      "*": "allow",
+      "*.ssh/id_*": "deny",
+      "*.aws/credentials*": "deny",
+      "*.mlflow/credentials*": "deny",
+      "*.netrc*": "deny",
+      "*.git-credentials*": "deny",
+      "*ml-scaffold/deny-probe*": "deny",
+{{parts opencode-bash}}
+    }
+  }
+}

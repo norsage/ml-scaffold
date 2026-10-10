@@ -1,0 +1,26 @@
+# Where each component skill is installed from. install_components.py reads
+# it; `--source <component>=<path>` installs one from a local checkout
+# instead, for developing that component.
+#
+# `git`: the remote. Cloned at `rev` (or the default branch) into the cache
+# (~/.cache/ml-scaffold/sources/<component>) and fetched on each install.
+# `path`: a local checkout, `~` expanded; used instead of `git` when it
+# exists. For a component with no remote yet (an infrastructure's own, say).
+# `rev`: the revision to install; empty means the default branch's head.
+# Pin it when a component has a release the projects should share.
+
+[research-log]
+git = "https://github.com/norsage/research-log.git"
+rev = ""
+
+[task-tracker]
+git = "https://github.com/norsage/task-tracker.git"
+rev = ""
+
+[mlflow-tracking]
+git = "https://github.com/norsage/mlflow-tracking.git"
+rev = ""
+
+[lightning-hydra]
+git = "https://github.com/norsage/lightning-hydra.git"
+rev = ""

@@ -1,0 +1,13 @@
+# Fragment: render.py adds the keys a project's pyproject.toml lacks. The
+# dependencies themselves go in with `uv add` (framework.md, step 2).
+{{parts pyproject}}
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--import-mode=importlib"]
+
+[tool.pyright]
+include = ["src"]
+
+[tool.ruff]
+src = ["src"]
+extend-exclude = [".agents", ".claude"]

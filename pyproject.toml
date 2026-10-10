@@ -1,0 +1,30 @@
+[project]
+name = "ml-scaffold-skill"
+version = "0.0.0"
+description = "Development environment for the ml-scaffold skill: tests and linters only, not a package"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.400",
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+# templates/ are rendered by render.py: `{{…}}` placeholders, not Python yet
+extend-exclude = ["templates"]
+
+[tool.pyright]
+pythonVersion = "3.11"
+include = ["scripts", "tests"]
+extraPaths = ["scripts"]

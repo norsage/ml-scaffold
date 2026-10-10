@@ -1,0 +1,25 @@
+# Infrastructure values: addresses and settings shared by every project on one
+# infrastructure.
+# Defaults of the skill: the agent takes them, the person does not type them.
+# Adapters name them `infra:<key>`, templates `{{infra.<key>}}`. A project
+# overrides a key in the [infra] table of its ml-scaffold.toml.
+#
+# The values below set a project up on one machine, with no service of its
+# own. An organisation pack with its own services replaces this file whole
+# with one that has every key below, its own values, and the keys of its own
+# components.
+
+# MLflow tracking URI (mlflow.toml tracking_uri). A server: with the trailing
+# slash, templates append API paths to it. Without one, a database in the
+# project (mlflow-tracking, "Local store").
+mlflow_uri = "sqlite:///logs/mlflow.db"
+# The server has personal logins (~/.mlflow/credentials of each member, its
+# `access.py`). false for a local store.
+mlflow_login = false
+
+# Values made from the project's: `{{project.name}}`, `{{project.env}}`, keys
+# above as `{{infra.<key>}}`.
+[derived]
+# Environment variable with the root of run directories: checkpoints and other
+# heavy outputs of a run. Unset, a run writes under logs/.
+runs_env = "{{project.env}}_RUNS"

@@ -1,0 +1,64 @@
+# Installed by `uv run pre-commit install`; every hook runs from uv.lock or
+# from the skills in .agents/skills, pre-commit itself downloads nothing. The
+# skills are edited in their own repositories, .claude holds links to them and
+# the agent's settings: no hook touches either.
+exclude: ^\.(agents|claude)/
+default_install_hook_types: [pre-commit, commit-msg]
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-format
+        name: ruff format
+        entry: uv run ruff format
+        language: system
+        types_or: [python, pyi]
+      - id: ruff-check
+        name: ruff check
+        entry: uv run ruff check
+        language: system
+        types_or: [python, pyi]
+      - id: pyright
+        name: pyright
+        entry: uv run pyright
+        language: system
+        files: ^src/
+        pass_filenames: false
+      - id: pytest
+        name: pytest
+        entry: uv run pytest -q
+        language: system
+        files: ^(src/|tests/|scripts/|configs/|pyproject\.toml$|uv\.lock$)
+        pass_filenames: false
+{{#if research-log}}
+      - id: research-log-check
+        name: research-log check.py
+        entry: python3 .agents/skills/research-log/scripts/check.py
+        language: system
+        files: ^docs/
+        pass_filenames: false
+      - id: research-log-index
+        name: research-log index.py --check
+        entry: python3 .agents/skills/research-log/scripts/index.py --check
+        language: system
+        files: ^docs/
+        pass_filenames: false
+{{/if}}
+{{#if task-tracker}}
+      - id: task-index
+        name: task-tracker index.py --check
+        entry: python3 .agents/skills/task-tracker/scripts/index.py --board docs --check
+        language: system
+        files: ^docs/
+        pass_filenames: false
+      - id: task-refs
+        name: task-tracker refs.py --check
+        entry: python3 .agents/skills/task-tracker/scripts/refs.py --check
+        language: system
+        pass_filenames: false
+{{/if}}
+      - id: conventional-commit
+        name: commit message (conventions-local.md)
+        language: pygrep
+        entry: '\A(?=[^\n]{1,72}(\n|\Z))(feat|fix|perf|refactor|test|docs|build|chore)(\([a-z0-9-]+\))?!?: [a-z0-9][^\n]*[^.\n](\n|\Z)'
+        args: [--multiline, --negate]
+        stages: [commit-msg]
